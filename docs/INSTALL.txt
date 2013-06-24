@@ -1,0 +1,17 @@
+docent.workshops Installation
+-----------------------------
+
+To install docent.workshops using zc.buildout and the plone.recipe.zope2instance
+recipe to manage your project, you can do this:
+
+* Add ``docent.workshops`` to the list of eggs to install, e.g.:
+
+    [buildout]
+    ...
+    eggs =
+        ...
+        docent.workshops
+       
+* Re-run buildout, e.g. with:
+
+    $ ./bin/buildout
