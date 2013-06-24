@@ -40,11 +40,6 @@ class IWorkshop(form.Schema, IImageScaleTraversable):
 
     form.model("models/workshop.xml")
 
-#@form.default_value(field=IWorkshop['title'])
-def user_fullname(data):
-    mtool = getToolByName(data.context, 'portal_membership')
-    import pdb; pdb.set_trace()
-    return 'Full name'
 
 # Custom content-type class; objects created for this content type will
 # be instances of this class. Use this class to add content-type specific
@@ -60,13 +55,6 @@ class Workshop(dexterity.Item):
 class EditForm(dexterity.EditForm):
     grok.context(IWorkshop)
 
-    def updateWidgets(self):
-        """ """
-        dexterity.EditForm.updateWidgets(self)
-        # hide the description and title from IDublinCore behavior
-        self.widgets['IDublinCore.title'].mode = HIDDEN_MODE
-        self.widgets['IDublinCore.description'].mode = HIDDEN_MODE
-
 
 class AddForm(dexterity.AddForm):
     grok.name('docent.workshops.workshop')
@@ -74,14 +62,13 @@ class AddForm(dexterity.AddForm):
     def updateWidgets(self):
         """ """
         dexterity.AddForm.updateWidgets(self)
-        # hide the description and title from IDublinCore behavior
-        self.widgets['IDublinCore.title'].mode = HIDDEN_MODE
-        self.widgets['IDublinCore.description'].mode = HIDDEN_MODE
         # autofill 'your name' and 'your email' based on login
         portal_state = getMultiAdapter((self.context, self.request), name=u'plone_portal_state')
         member = portal_state.member()
-        self.widgets['your_name'].value = member.getProperty('fullname')
-        self.widgets['your_email'].value = member.getProperty('email')
+        if not self.widgets['your_name'].value:
+            self.widgets['your_name'].value = member.getProperty('fullname')
+        if not self.widgets['your_email'].value:
+            self.widgets['your_email'].value = member.getProperty('email')
 
 
 # View class
