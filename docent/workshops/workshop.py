@@ -69,6 +69,8 @@ class AddForm(dexterity.AddForm):
             self.widgets['your_name'].value = member.getProperty('fullname')
         if not self.widgets['your_email'].value:
             self.widgets['your_email'].value = member.getProperty('email')
+        # hide all other fieldsets except default one
+        self.groups = []
 
 
 # View class
