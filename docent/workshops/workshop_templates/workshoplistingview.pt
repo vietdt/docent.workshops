@@ -1,0 +1,132 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="plone">
+
+<body>
+    <metal:title fill-slot="content-title">
+        <h1 class="documentFirstHeading" i18n:translate="">
+            Workshops
+        </h1>
+    </metal:title>
+
+    <metal:description fill-slot="content-description">
+        <div class="documentDescription description">
+            These are the workshops proposed so far
+        </div>
+    </metal:description>
+
+    <metal:content-core fill-slot="content-core"
+                        tal:define="path python:'';
+                                    contentFilter python:{'path': path, 'portal_type': 'docent.workshops.workshop'};">
+        <metal:block define-macro="listing" extend-macro="context/folder_listing/macros/content-core">
+
+            <metal:entries fill-slot="entries">
+
+            <div metal:use-macro="context/batch_macros/macros/navigation" />
+
+            <table class="listing"
+                   summary="Content listing"
+                   i18n:attributes="summary summary_content_listing;">
+                <thead>
+                    <tr>
+                        <th class="nosort">&nbsp;<tal:title i18n:translate="listingheader_title"
+                          >Title</tal:title>&nbsp;</th>
+                        <th class="nosort">&nbsp;<tal:title i18n:translate="listingheader_author"
+                          >Author</tal:title>&nbsp;</th>
+                        <th class="nosort">&nbsp;<tal:block i18n:translate=""
+                          >Submitted</tal:block>&nbsp;</th>
+                        <th class="nosort">&nbsp;<tal:block i18n:translate=""
+                          >Budget Requested</tal:block>&nbsp;</th>
+                        <th class="nosort">&nbsp;<tal:block i18n:translate=""
+                          >Class Size Limit</tal:block>&nbsp;</th>
+                        <th class="nosort">&nbsp;<tal:block i18n:translate=""
+                          >Comments</tal:block>&nbsp;</th>
+                        <th class="nosort">&nbsp;<tal:block i18n:translate=""
+                          >State</tal:block>&nbsp;</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <metal:block use-macro="context/folder_listing/macros/entries">
+                        <metal:entry fill-slot="entry">
+
+                    <tr metal:define-macro="listitem"
+                        tal:define="oddrow repeat/item/odd;
+                                    item_obj item/getObject;
+                                    item_sumitted item/created;
+                                    item_budget item_obj/budget_requested;
+                                    item_class_size_limit item_obj/class_size_limit;
+                                    item_comments item_obj/comments;
+                                    item_state item/review_state;"
+                        tal:attributes="class python:oddrow and 'odd' or 'even'">
+
+                        <td>
+                            <img width="16" height="16"
+                                 src="" alt=""
+                                 tal:condition="item_icon/url"
+                                 tal:attributes="src item_icon/url;
+                                                 alt item_icon/description;
+                                                 title item_icon/title;
+                                                 width item_icon/width;
+                                                 height item_icon/height;" />
+                            <a href="#"
+                               tal:attributes="href python:item_type in use_view_action and item_url+'/view' or item_url;
+                                               class string:$item_wf_state_class $item_type_class;
+                                               title item_description;"
+                               tal:content="item_title_or_id">
+                                Item Title
+                            </a>
+                        </td>
+
+                        <td>
+                            <tal:name tal:condition="item_creator"
+                              tal:define="author python:pas_member.info(item_creator)">
+                            <a href="#"
+                               tal:attributes="href string:${navigation_root_url}/author/${item_creator}"
+                               tal:content="author/name_or_id"
+                               tal:omit-tag="not:author">
+                              Bob Dobalina
+                            </a>
+                            </tal:name>
+                        </td>
+
+                        <td tal:content="python:item_sumitted.strftime('%d %b')">
+                          16 Aug
+                        </td>
+
+                        <td tal:content="python:item_budget">
+                          Budget Requested
+                        </td>
+
+                        <td tal:content="python:item_class_size_limit=='no' and 'None' or item_class_size_limit">
+                          Class Size Limit
+                        </td>
+
+                        <td tal:content="python:item_comments and item_comments or 'None'">
+                          Comments
+                        </td>
+
+                        <td tal:content="python:item_state">
+                          Draft
+                        </td>
+
+                    </tr>
+
+                        </metal:entry>
+                    </metal:block>
+                </tbody>
+            </table>
+
+            </metal:entries>
+        </metal:block>
+
+        <metal:subtopics use-macro="context/atct_topic_view/macros/folderlisting_macro" />
+
+    </metal:content-core>
+
+</body>
+</html>
