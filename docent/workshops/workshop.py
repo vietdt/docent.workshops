@@ -6,7 +6,7 @@ from zope.component import getMultiAdapter
 from zope.schema.interfaces import IContextSourceBinder
 from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 
-from zope.interface import invariant, Invalid
+from zope.interface import Interface, invariant, Invalid
 
 from z3c.form import group, field
 from z3c.form.interfaces import HIDDEN_MODE
@@ -59,6 +59,9 @@ class EditForm(dexterity.EditForm):
 class AddForm(dexterity.AddForm):
     grok.name('docent.workshops.workshop')
 
+    label = _(u'Propose a Workshop')
+    description = _(u'Use this form to propose a workshop to the Seabeck Board')
+
     def updateWidgets(self):
         """ """
         dexterity.AddForm.updateWidgets(self)
@@ -83,8 +86,9 @@ class AddForm(dexterity.AddForm):
 # of this type by uncommenting the grok.name line below or by
 # changing the view class name and template filename to View / view.pt.
 
-class SampleView(grok.View):
-    grok.context(IWorkshop)
+class WorkshopListingView(grok.View):
+    # available on all context
+    grok.context(Interface)
     grok.require('zope2.View')
 
-    # grok.name('view')
+    grok.name('workshop_listing')
