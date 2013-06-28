@@ -7,13 +7,13 @@
         <!-- field definitions -->
 
         <field name="title" type="zope.schema.TextLine">
-          <description></description>
-          <title>Title</title>
+          <description>Name of Workshop - 20 charecters max</description>
+          <title>Workshop Title</title>
           <max_length>20</max_length>
         </field>
         <field name="description" type="zope.schema.Text">
-          <description>A short summary of the content.</description>
-          <title>Description</title>
+          <description>A short summary of Workshop - 40 charecters max</description>
+          <title>Workshop Description</title>
           <max_length>40</max_length>
         </field>
         <field name="full_description" type="plone.app.textfield.RichText">
@@ -30,7 +30,7 @@
           <title>Class Size Limit</title>
           <vocabulary>docent.workshops.vocab.yesno</vocabulary>
         </field>
-        <field name="why_is_this_right_for_seabeck" type="zope.schema.TextLine">
+        <field name="why_is_this_right_for_seabeck" type="zope.schema.Text">
           <description>Why do you think this will add to the Seabeck Weekend?</description>
           <title>Why Is This Right For Seabeck</title>
         </field>
@@ -58,6 +58,7 @@
         <field name="comments" type="zope.schema.Text">
           <description>Anything else we need to know</description>
           <title>Comments</title>
+          <required>False</required>
         </field>
         
     </schema>
