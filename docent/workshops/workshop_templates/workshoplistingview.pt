@@ -6,6 +6,14 @@
       metal:use-macro="context/main_template/macros/master"
       i18n:domain="plone">
 
+<head>
+    <metal:block fill-slot="style_slot">
+        <link rel="stylesheet" type="text/css"
+            tal:attributes="href string:${context/@@plone_portal_state/portal_url}/++resource++docent.workshops/main.css"
+            />
+    </metal:block>
+</head>
+
 <body>
     <metal:title fill-slot="content-title">
         <h1 class="documentFirstHeading" i18n:translate="">
@@ -14,21 +22,23 @@
     </metal:title>
 
     <metal:description fill-slot="content-description">
-        <div class="documentDescription description">
+        <div class="documentDescription description workshop-listing-description">
             These are the workshops proposed so far
         </div>
     </metal:description>
 
     <metal:content-core fill-slot="content-core"
                         tal:define="path python:'';
-                                    contentFilter python:{'path': path, 'portal_type': 'docent.workshops.workshop'};">
+                                    contentFilter python:{'path': path,
+                                                          'portal_type': 'docent.workshops.workshop',
+                                                          'review_state': ['Approved', 'Submitted', 'Rejected']};">
         <metal:block define-macro="listing" extend-macro="context/folder_listing/macros/content-core">
 
             <metal:entries fill-slot="entries">
 
             <div metal:use-macro="context/batch_macros/macros/navigation" />
 
-            <table class="listing"
+            <table class="listing workshop-listing"
                    summary="Content listing"
                    i18n:attributes="summary summary_content_listing;">
                 <thead>
@@ -110,8 +120,9 @@
                           Comments
                         </td>
 
-                        <td tal:content="python:item_state">
-                          Draft
+                        <td tal:content="python:item_state"
+                            tal:attributes="class item_state;">
+                          Approved
                         </td>
 
                     </tr>
