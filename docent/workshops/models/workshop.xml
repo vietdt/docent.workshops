@@ -9,12 +9,11 @@
         <field name="title" type="zope.schema.TextLine">
           <description>Name of Workshop - 20 charecters max</description>
           <title>Workshop Title</title>
-          <max_length>20</max_length>
+          <max_length>30</max_length>
         </field>
         <field name="description" type="zope.schema.Text">
           <description>A short summary of Workshop - 40 charecters max</description>
           <title>Workshop Description</title>
-          <max_length>40</max_length>
         </field>
         <field name="full_description" type="plone.app.textfield.RichText">
           <description>Give us a complete description of the proposed Workshop</description>
