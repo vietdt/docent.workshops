@@ -1,0 +1,11 @@
+.workshop-listing-description {
+    margin-bottom: 20px;
+}
+
+.workshop-listing td.Submitted {
+    color: orange;
+}
+
+.workshop-listing td.Rejected {
+    color: red;
+}
