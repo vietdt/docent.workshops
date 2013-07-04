@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<rolemap>
+  <permissions>
+    <permission name="docent.workshops: Add workshop" acquire="True">
+      <role name="Owner"/>
+      <role name="Manager"/>
+      <role name="Member"/>
+      <role name="Contributor"/>
+    </permission>
+    <permission name="docent.workshops: Review workshop" acquire="True">
+      <role name="Manager"/>
+      <role name="Reviewer"/>
+      <role name="Editor"/>
+    </permission>
+  </permissions>
+</rolemap>
