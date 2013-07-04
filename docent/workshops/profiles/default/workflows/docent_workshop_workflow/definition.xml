@@ -1,0 +1,113 @@
+<?xml version="1.0"?>
+<dc-workflow workflow_id="docent_workshop_workflow" title="Docent Workshop Review" description="This is used for the Docent workshop tool" state_variable="review_state" initial_state="Draft" manager_bypass="False">
+ <permission>Access contents information</permission>
+ <permission>Modify portal content</permission>
+ <permission>Reply to item</permission>
+ <permission>View</permission>
+ <state state_id="Approved" title="Approved">
+  <description>This workshop has been approved</description>
+  <exit-transition transition_id="withdraw"/>
+ </state>
+ <state state_id="Draft" title="Draft">
+  <exit-transition transition_id="submit"/>
+ </state>
+ <state state_id="Rejected" title="Rejected">
+  <description>This class has been rejected and is no longer under consideration</description>
+  <exit-transition transition_id="withdraw"/>
+ </state>
+ <state state_id="Submitted" title="Submitted">
+  <description>Waiting for board review</description>
+  <exit-transition transition_id="approve"/>
+  <exit-transition transition_id="reject"/>
+  <exit-transition transition_id="return"/>
+ </state>
+ <transition transition_id="approve" title="approve" new_state="Approved" trigger="USER" before_script="" after_script="">
+  <description>The board approves the proposed workshop.  this makes it visible to all camperts</description>
+  <action url="" category="workflow" icon="">Approve</action>
+  <guard>
+   <guard-permission>docent.workshops: Review workshop</guard-permission>
+  </guard>
+ </transition>
+ <transition transition_id="reject" title="reject" new_state="Rejected" trigger="USER" before_script="" after_script="">
+  <description>The board rejects this proposed workshop.  It is removed from consideration</description>
+  <action url="" category="workflow" icon="">Reject</action>
+  <guard>
+   <guard-permission>docent.workshops: Review workshop</guard-permission>
+  </guard>
+ </transition>
+ <transition transition_id="retract" title="retract" new_state="Draft" trigger="USER" before_script="" after_script="">
+  <description>Allows owner to retract their content while in the 'Submitted' state</description>
+  <action url="" category="workflow" icon="">Retract</action>
+  <guard>
+   <guard-role>Owner</guard-role>
+  </guard>
+ </transition>
+ <transition transition_id="return" title="return" new_state="Draft" trigger="USER" before_script="" after_script="">
+  <description>The board returns content to owner with comments.  This is not rejection, the board wants more info or some changes</description>
+  <action url="" category="workflow" icon="">Return</action>
+  <guard>
+   <guard-permission>docent.workshops: Review workshop</guard-permission>
+  </guard>
+ </transition>
+ <transition transition_id="submit" title="submit for Approval" new_state="Submitted" trigger="USER" before_script="" after_script="">
+  <description>When camper done creating proposed workshop, submits to Seabeck board for approval</description>
+  <action url="" category="workflow" icon="">Submit</action>
+  <guard>
+   <guard-role>Owner</guard-role>
+  </guard>
+ </transition>
+ <transition transition_id="withdraw" title="withdraw" new_state="Submitted" trigger="USER" before_script="" after_script="">
+  <description>this allows the board to withdraw a content from a final state.</description>
+  <action url="" category="workflow" icon="">withdraw</action>
+  <guard>
+   <guard-permission>docent.workshops: Review workshop</guard-permission>
+  </guard>
+ </transition>
+ <variable variable_id="action" for_catalog="False" for_status="True" update_always="True">
+  <description>Previous transition</description>
+  <default>
+   
+   <expression>transition/getId|nothing</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="actor" for_catalog="False" for_status="True" update_always="True">
+  <description>The ID of the user who performed the previous transition</description>
+  <default>
+   
+   <expression>user/getUserName</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="comments" for_catalog="False" for_status="True" update_always="True">
+  <description>Comment about the last transition</description>
+  <default>
+   
+   <expression>python:state_change.kwargs.get('comment', '')</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="review_history" for_catalog="False" for_status="False" update_always="False">
+  <description>Provides access to workflow history</description>
+  <default>
+   
+   <expression>state_change/getHistory</expression>
+  </default>
+  <guard>
+   <guard-permission>Request review</guard-permission>
+   <guard-permission>Review portal content</guard-permission>
+  </guard>
+ </variable>
+ <variable variable_id="time" for_catalog="False" for_status="True" update_always="True">
+  <description>When the previous transition was performed</description>
+  <default>
+   
+   <expression>state_change/getDateTime</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+</dc-workflow>
