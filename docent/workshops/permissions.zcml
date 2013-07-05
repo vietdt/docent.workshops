@@ -12,4 +12,9 @@
         title="docent.workshops: Review workshop"
         />
 
+    <permission
+        id="docent.workshops.ViewWorkshop"
+        title="docent.workshops: View workshop"
+        />
+
 </configure>
