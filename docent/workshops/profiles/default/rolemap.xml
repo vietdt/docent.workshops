@@ -12,5 +12,10 @@
       <role name="Reviewer"/>
       <role name="Editor"/>
     </permission>
+    <permission name="docent.workshops: View workshop" acquire="True">
+      <role name="Owner"/>
+      <role name="Manager"/>
+      <role name="Member"/>
+    </permission>
   </permissions>
 </rolemap>
