@@ -89,6 +89,7 @@ class AddForm(dexterity.AddForm):
 class WorkshopListingView(grok.View):
     # available on all context
     grok.context(Interface)
-    grok.require('zope2.View')
+    # should be only Authenticated members can see this page
+    grok.require('docent.workshops.ViewWorkshop')
 
     grok.name('workshop_listing')

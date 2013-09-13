@@ -29,6 +29,7 @@
 
     <metal:content-core fill-slot="content-core"
                         tal:define="path python:'';
+                                    isBoard python:context.portal_membership.checkPermission('docent.workshops: Review workshop', context);
                                     contentFilter python:{'path': path,
                                                           'portal_type': 'docent.workshops.workshop',
                                                           'review_state': ['Approved', 'Submitted', 'Rejected']};">
@@ -45,17 +46,25 @@
                     <tr>
                         <th class="nosort">&nbsp;<tal:title i18n:translate="listingheader_title"
                           >Title</tal:title>&nbsp;</th>
-                        <th class="nosort">&nbsp;<tal:title i18n:translate="listingheader_author"
-                          >Author</tal:title>&nbsp;</th>
-                        <th class="nosort">&nbsp;<tal:block i18n:translate=""
+                        <th class="nosort">&nbsp;<tal:title i18n:translate=""
+                          >Instructor</tal:title>&nbsp;</th>
+                        <th class="nosort"
+                            tal:condition="isBoard">&nbsp;<tal:block i18n:translate=""
                           >Submitted</tal:block>&nbsp;</th>
-                        <th class="nosort">&nbsp;<tal:block i18n:translate=""
+                        <th class="nosort"
+                            tal:condition="isBoard">&nbsp;<tal:block i18n:translate=""
                           >Budget Requested</tal:block>&nbsp;</th>
+                        <th class="nosort">&nbsp;<tal:block i18n:translate=""
+                          >Equipment Required</tal:block>&nbsp;</th>
                         <th class="nosort">&nbsp;<tal:block i18n:translate=""
                           >Class Size Limit</tal:block>&nbsp;</th>
                         <th class="nosort">&nbsp;<tal:block i18n:translate=""
                           >Comments</tal:block>&nbsp;</th>
-                        <th class="nosort">&nbsp;<tal:block i18n:translate=""
+                        <th class="nosort"
+                            tal:condition="isBoard">&nbsp;<tal:block i18n:translate=""
+                          >Board Comments</tal:block>&nbsp;</th>
+                        <th class="nosort"
+                            tal:condition="isBoard">&nbsp;<tal:block i18n:translate=""
                           >State</tal:block>&nbsp;</th>
                     </tr>
                 </thead>
@@ -69,8 +78,10 @@
                                     item_obj item/getObject;
                                     item_sumitted item/created;
                                     item_budget item_obj/budget_requested;
+                                    item_equipment item_obj/equipment_required;
                                     item_class_size_limit item_obj/class_size_limit;
                                     item_comments item_obj/comments;
+                                    item_commentsBoardOnly item_obj/commentsBoardOnly;
                                     item_state item/review_state;"
                         tal:attributes="class python:oddrow and 'odd' or 'even'">
 
@@ -104,12 +115,18 @@
                             </tal:name>
                         </td>
 
-                        <td tal:content="python:item_sumitted.strftime('%d %b')">
+                        <td tal:condition="isBoard"
+                            tal:content="python:item_sumitted.strftime('%d %b')">
                           16 Aug
                         </td>
 
-                        <td tal:content="python:item_budget">
+                        <td tal:condition="isBoard"
+                            tal:content="string:$$${item_budget}">
                           Budget Requested
+                        </td>
+
+                        <td tal:content="python:item_equipment">
+                          Equipment Required
                         </td>
 
                         <td tal:content="python:item_class_size_limit=='no' and 'None' or item_class_size_limit">
@@ -119,8 +136,14 @@
                         <td tal:content="python:item_comments and item_comments or 'None'">
                           Comments
                         </td>
+                        
+                        <td tal:condition="isBoard"
+                            tal:content="python:item_commentsBoardOnly and item_commentsBoardOnly or 'None'">
+                          Board Comments
+                        </td>
 
-                        <td tal:content="python:item_state"
+                        <td tal:condition="isBoard"
+                            tal:content="python:item_state"
                             tal:attributes="class item_state;">
                           Approved
                         </td>

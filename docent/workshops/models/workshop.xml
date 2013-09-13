@@ -1,6 +1,7 @@
 <?xml version="1.0" ?>
 <model xmlns="http://namespaces.plone.org/supermodel/schema"
-       xmlns:form="http://namespaces.plone.org/supermodel/form">
+       xmlns:form="http://namespaces.plone.org/supermodel/form"
+       xmlns:security="http://namespaces.plone.org/supermodel/security">
     
     <schema>
 
@@ -57,6 +58,12 @@
         <field name="comments" type="zope.schema.Text">
           <description>Anything else we need to know</description>
           <title>Comments</title>
+          <required>False</required>
+        </field>
+        <field name="commentsBoardOnly" type="zope.schema.Text"
+               security:write-permission="docent.workshops.ReviewWorkshop">
+          <description>Anything else we need to know</description>
+          <title>Comments for Board only</title>
           <required>False</required>
         </field>
         
