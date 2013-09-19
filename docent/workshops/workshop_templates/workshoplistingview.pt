@@ -28,8 +28,8 @@
     <metal:description fill-slot="content-description">
         <div class="documentDescription description workshop-listing-description"
              tal:define="isBoard python:context.portal_membership.checkPermission('docent.workshops: Review workshop', context);">
-          <tal:block condition="isBoard">These are the workshops available so far. Workshops get added, so check back.</tal:block>
-          <tal:block condition="not:isBoard">These are the workshops proposed or approved so far. The campers only see the camps that are in the "approved" state.</tal:block>
+          <tal:block condition="not:isBoard">These are the workshops available so far. Workshops get added, so check back.</tal:block>
+          <tal:block condition="isBoard">These are the workshops proposed or approved so far. The campers only see the camps that are in the "approved" state.</tal:block>
         </div>
     </metal:description>
 
