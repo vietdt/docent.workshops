@@ -14,7 +14,7 @@
     </metal:block>
 </head>
 
-<body tal:define="isBoard python:context.portal_membership.checkPermission('docent.workshops: Review workshop', context);">
+<body>
     <metal:column fill-slot="column_one_slot" tal:content="nothing">
       Hide left column
     </metal:column>
@@ -26,7 +26,8 @@
     </metal:title>
 
     <metal:description fill-slot="content-description">
-        <div class="documentDescription description workshop-listing-description">
+        <div class="documentDescription description workshop-listing-description"
+             tal:define="isBoard python:context.portal_membership.checkPermission('docent.workshops: Review workshop', context);">
           <tal:block condition="isBoard">These are the workshops available so far. Workshops get added, so check back.</tal:block>
           <tal:block condition="not:isBoard">These are the workshops proposed or approved so far. The campers only see the camps that are in the "approved" state.</tal:block>
         </div>
@@ -34,6 +35,7 @@
 
     <metal:content-core fill-slot="content-core"
                         tal:define="path python:'';
+                                    isBoard python:context.portal_membership.checkPermission('docent.workshops: Review workshop', context);
                                     contentFilter python:{'path': path,
                                                           'portal_type': 'docent.workshops.workshop',
                                                           'review_state': ['Approved', 'Submitted', 'Rejected']};">
