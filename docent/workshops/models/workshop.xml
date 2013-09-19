@@ -61,6 +61,7 @@
           <required>False</required>
         </field>
         <field name="commentsBoardOnly" type="zope.schema.Text"
+               security:read-permission="docent.workshops.ReviewWorkshop"
                security:write-permission="docent.workshops.ReviewWorkshop">
           <description>Anything else we need to know</description>
           <title>Comments for Board only</title>
