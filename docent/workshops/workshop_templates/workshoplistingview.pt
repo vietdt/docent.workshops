@@ -61,7 +61,7 @@
                             tal:condition="isBoard">&nbsp;<tal:block i18n:translate=""
                           >Budget Requested</tal:block>&nbsp;</th>
                         <th class="nosort">&nbsp;<tal:block i18n:translate=""
-                          >Equipment Required</tal:block>&nbsp;</th>
+                          >Equipment Requested</tal:block>&nbsp;</th>
                         <th class="nosort">&nbsp;<tal:block i18n:translate=""
                           >Class Size Limit</tal:block>&nbsp;</th>
                         <th class="nosort">&nbsp;<tal:block i18n:translate=""
@@ -132,7 +132,7 @@
                         </td>
 
                         <td tal:content="python:item_equipment">
-                          Equipment Required
+                          Equipment Requested
                         </td>
 
                         <td tal:content="python:item_class_size_limit=='no' and 'None' or item_class_size_limit">
