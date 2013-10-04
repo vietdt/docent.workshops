@@ -60,7 +60,7 @@ class AddForm(dexterity.AddForm):
     grok.name('docent.workshops.workshop')
 
     label = _(u'Propose a Workshop')
-    description = _(u'Use this form to propose a workshop to the Seabeck Board')
+    description = _(u'Use This Form to Propose a Workshop to the Seabeck Board')
 
     def updateWidgets(self):
         """ """

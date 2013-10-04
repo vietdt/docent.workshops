@@ -6,7 +6,8 @@
   <!-- Basic metadata -->
   <property name="title" i18n:translate="">Workshop</property>
   <property name="description"
-    i18n:translate="">This is used to propose a new workshop and for the board to review and decide.  When approved the workshop will be available to the campers to sign up</property>
+    i18n:translate="">This is used to Propose a Workshop
+</property>
   <property name="icon_expr">string:${portal_url}/document_icon.png</property>
   <property name="factory">docent.workshops.workshop</property>
   <property name="global_allow">True</property>

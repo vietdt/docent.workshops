@@ -21,7 +21,7 @@
 
     <metal:title fill-slot="content-title">
         <h1 class="documentFirstHeading" i18n:translate="">
-            Workshops
+            Seabeck Workshops
         </h1>
     </metal:title>
 
@@ -65,10 +65,10 @@
                         <th class="nosort">&nbsp;<tal:block i18n:translate=""
                           >Class Size Limit</tal:block>&nbsp;</th>
                         <th class="nosort">&nbsp;<tal:block i18n:translate=""
-                          >Comments</tal:block>&nbsp;</th>
+                          >Comments to campers</tal:block>&nbsp;</th>
                         <th class="nosort"
                             tal:condition="isBoard">&nbsp;<tal:block i18n:translate=""
-                          >Board Comments</tal:block>&nbsp;</th>
+                          >Comments to Board</tal:block>&nbsp;</th>
                         <th class="nosort"
                             tal:condition="isBoard">&nbsp;<tal:block i18n:translate=""
                           >State</tal:block>&nbsp;</th>

@@ -25,8 +25,8 @@ class ClassLengthVocab(object):
     
     def __call__(self, context):
         return SimpleVocabulary([SimpleTerm(value=None, title=_(u'-- Select --')),
-                                 SimpleTerm(value=1, title=_(u'1')),
-                                 SimpleTerm(value=2, title=_(u'2')),
-                                 SimpleTerm(value=2.5, title=_(u'2.5')),
-                                 SimpleTerm(value=3, title=_(u'3'))])
+                                 SimpleTerm(value=75, title=_(u'75')),
+                                 SimpleTerm(value=150, title=_(u'150')),
+                                 SimpleTerm(value=225, title=_(u'225')),
+                                 SimpleTerm(value=300, title=_(u'300'))])
 grok.global_utility(ClassLengthVocab, name=u"docent.workshops.vocab.class_length")
