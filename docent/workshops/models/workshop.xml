@@ -28,7 +28,7 @@
         <field name="class_size_limit" type="zope.schema.Choice">
           <description>Do you want to limit the class size</description>
           <title>Class Size Limit</title>
-          <vocabulary>docent.workshops.vocab.yesno</vocabulary>
+          <vocabulary>docent.workshops.vocab.class_size_limit</vocabulary>
         </field>
         <field name="why_is_this_right_for_seabeck" type="zope.schema.Text">
           <description>Why do you think this will add to the Seabeck Weekend?</description>
@@ -47,9 +47,10 @@
           <description>Help us understand your experience that will allow you to teach the class</description>
           <title>Why Are You Qualified to Teach This Class</title>
         </field>
-        <field name="budget_requested" type="zope.schema.Int">
-          <description>We have limited funds, so be reasonable</description>
+        <field name="budget_requested" type="zope.schema.Choice">
+          <description>Please estimate your costs for presenting this workshop. We will reimburse the approved amount with proper receipts</description>
           <title>Budget Requested</title>
+          <vocabulary>docent.workshops.vocab.budget_requested</vocabulary>
         </field>
         <field name="equipment_required" type="zope.schema.Text">
           <description>Is there any equipment you need.  We can't promise we have it.</description>
@@ -61,8 +62,7 @@
           <required>False</required>
         </field>
         <field name="commentsBoardOnly" type="zope.schema.Text"
-               security:read-permission="docent.workshops.ReviewWorkshop"
-               security:write-permission="docent.workshops.ReviewWorkshop">
+               security:read-permission="docent.workshops.ReviewWorkshop">
           <description>Anything else we need to know</description>
           <title>Comments for Board only</title>
           <required>False</required>
