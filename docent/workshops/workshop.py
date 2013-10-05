@@ -22,6 +22,7 @@ from plone.app.textfield import RichText
 from z3c.relationfield.schema import RelationList, RelationChoice
 from plone.formwidget.contenttree import ObjPathSourceBinder
 
+from docent.workshops.vocabularies import equipment_required_binder
 from docent.workshops import MessageFactory as _
 
 
@@ -60,7 +61,14 @@ class AddForm(dexterity.AddForm):
     grok.name('docent.workshops.workshop')
 
     label = _(u'Propose a Workshop')
-    description = _(u'Use This Form to Propose a Workshop to the Seabeck Board')
+    description = _(u'Workshops are a key ingredient to a successful Seabeck and \
+    any camper can propose a workshop. Please complete this form. The workshop \
+    coordinator will review your proposal. If the proposal is acceptable as submitted, \
+    it will be approved and then available for camper to see.<br>If there are any \
+    comments, the coordinator will return your proposal to you with an explanation. \
+    Please read the comments. this \'return\' does not likely mean your workshop \
+    isn\'t welcome. Most likely the coordinator is simply looking for clarification. \
+    Please update your proposal based on this request and resubmit')
 
     def updateWidgets(self):
         """ """
@@ -93,3 +101,17 @@ class WorkshopListingView(grok.View):
     grok.require('docent.workshops.ViewWorkshop')
 
     grok.name('workshop_listing')
+
+    def renderEquipmentRequiredValues(self, obj, value):
+        """ convert a list of EquipmentRequired to string separated by comma """
+        if type(value) == list:
+            vocab = equipment_required_binder(obj)
+            terms = []
+            for v in value:
+                try:
+                    term = vocab.getTerm(v)
+                except LookupError:
+                    terms.append(v)
+                terms.append(term.title)
+            return ', '.join(terms);
+        return value

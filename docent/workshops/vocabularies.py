@@ -1,6 +1,6 @@
 from five import grok
 
-from zope.schema.interfaces import IVocabularyFactory
+from zope.schema.interfaces import IVocabularyFactory, IContextSourceBinder
 from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 
 from docent.workshops import MessageFactory as _
@@ -58,3 +58,15 @@ class BudgetRequestedVocab(object):
                                  SimpleTerm(value=25, title=_(u'25')),
                                  SimpleTerm(value=20, title=_(u'50'))])
 grok.global_utility(BudgetRequestedVocab, name=u"docent.workshops.vocab.budget_requested")
+
+class EquipmentRequestedBinder(object):
+    grok.implements(IContextSourceBinder)
+
+    def __call__(self, context):
+        return SimpleVocabulary([SimpleTerm(value='tv-vcr', title=_(u'TV/VCR')),
+                                 SimpleTerm(value='tv-dvd', title=_(u'TV/DVD')),
+                                 SimpleTerm(value='easel', title=_(u'Easel')),
+                                 SimpleTerm(value='digital-projector', title=_(u'Digital Projector')),
+                                 SimpleTerm(value='overhead-projector', title=_(u'Overhead Projector')),
+                                 SimpleTerm(value='screen', title=_(u'Screen'))])
+equipment_required_binder = EquipmentRequestedBinder()

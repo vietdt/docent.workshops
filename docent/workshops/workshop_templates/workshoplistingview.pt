@@ -131,7 +131,7 @@
                           Budget Requested
                         </td>
 
-                        <td tal:content="python:item_equipment">
+                        <td tal:content="python:view.renderEquipmentRequiredValues(item_obj, item_equipment)">
                           Equipment Requested
                         </td>
 

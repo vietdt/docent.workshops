@@ -52,9 +52,13 @@
           <title>Budget Requested</title>
           <vocabulary>docent.workshops.vocab.budget_requested</vocabulary>
         </field>
-        <field name="equipment_required" type="zope.schema.Text">
+        <field name="equipment_required" type="zope.schema.List"
+               form:widget="z3c.form.browser.checkbox.CheckBoxFieldWidget">
           <description>Is there any equipment you need.  We can't promise we have it.</description>
-          <title>Equipment Required</title>
+          <title>Equipment Requested</title>
+          <value_type type="zope.schema.Choice">
+            <source>docent.workshops.vocabularies.equipment_required_binder</source>
+          </value_type>
         </field>
         <field name="comments" type="zope.schema.Text">
           <description>Anything else we need to know</description>
