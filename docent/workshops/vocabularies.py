@@ -52,11 +52,13 @@ class BudgetRequestedVocab(object):
     grok.implements(IVocabularyFactory)
     
     def __call__(self, context):
-        return SimpleVocabulary([SimpleTerm(value=5, title=_(u'5')),
-                                 SimpleTerm(value=10, title=_(u'10')),
-                                 SimpleTerm(value=15, title=_(u'15')),
-                                 SimpleTerm(value=25, title=_(u'25')),
-                                 SimpleTerm(value=20, title=_(u'50'))])
+        """ 5 to 50 in increments of 5 """
+        value = 5
+        terms = []
+        while value <= 50:
+            terms.append(SimpleTerm(value=value, title=_(str(value))))
+            value += 5
+        return SimpleVocabulary(terms)
 grok.global_utility(BudgetRequestedVocab, name=u"docent.workshops.vocab.budget_requested")
 
 class EquipmentRequestedBinder(object):

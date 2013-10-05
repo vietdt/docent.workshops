@@ -7,18 +7,19 @@
 
         <!-- field definitions -->
 
-        <field name="title" type="zope.schema.TextLine">
-          <description>Name of Workshop - 20 charecters max</description>
+        <field name="title" type="zope.schema.Text">
+          <description>Name of Workshop - 40 charecters max</description>
           <title>Workshop Title</title>
-          <max_length>30</max_length>
+          <max_length>40</max_length>
         </field>
         <field name="description" type="zope.schema.Text">
-          <description>A short summary of Workshop - 40 charecters max</description>
+          <description>A short summary of Workshop</description>
           <title>Workshop Description</title>
         </field>
         <field name="full_description" type="plone.app.textfield.RichText">
           <description>Give us a complete description of the proposed Workshop</description>
           <title>Full Description</title>
+          <required>False</required>
         </field>
         <field name="class_length" type="zope.schema.Choice">
           <description>How long to you expect the Workshop to be?  Typically they are less than 2 hours</description>
@@ -29,10 +30,6 @@
           <description>Do you want to limit the class size</description>
           <title>Class Size Limit</title>
           <vocabulary>docent.workshops.vocab.class_size_limit</vocabulary>
-        </field>
-        <field name="why_is_this_right_for_seabeck" type="zope.schema.Text">
-          <description>Why do you think this will add to the Seabeck Weekend?</description>
-          <title>Why Is This Right For Seabeck</title>
         </field>
         <field name="your_name" type="zope.schema.TextLine">
           <description>Your full name</description>
@@ -45,7 +42,7 @@
         </field>
         <field name="why_are_you_qualified_to_teach_this_class" type="zope.schema.Text">
           <description>Help us understand your experience that will allow you to teach the class</description>
-          <title>Why Are You Qualified to Teach This Class</title>
+          <title>Please Give a Short Bio for Your Students</title>
         </field>
         <field name="budget_requested" type="zope.schema.Choice">
           <description>Please estimate your costs for presenting this workshop. We will reimburse the approved amount with proper receipts</description>
